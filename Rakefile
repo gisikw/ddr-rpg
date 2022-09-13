@@ -1,17 +1,19 @@
 require 'tempfile'
 
 # 300 DPI = 825x1275 images
-PAGE_SIZE = '825x1275'
+WIDTH=825
+HEIGHT=1275
+PAGE_SIZE = "#{WIDTH}x#{HEIGHT}"
 
-# TODO: Check bins exist
+# TODO: Check bins exist: imagemagick, pandoc, wkhtmltoiomage
 
 task :build_pages do
-  `curl -s https://via.placeholder.com/825x1275.png?text=page%201 > ./pages/1.png`
-  `curl -s https://via.placeholder.com/825x1275.png?text=page%202 > ./pages/2.png`
-  `curl -s https://via.placeholder.com/825x1275.png?text=page%203 > ./pages/3.png`
-  `curl -s https://via.placeholder.com/825x1275.png?text=page%204 > ./pages/4.png`
-  `curl -s https://via.placeholder.com/825x1275.png?text=page%205 > ./pages/5.png`
-  `curl -s https://via.placeholder.com/825x1275.png?text=page%206 > ./pages/6.png`
+  `curl -s https://via.placeholder.com/825x1275.png?text=cover > ./pages/1.png`
+  `curl -s https://via.placeholder.com/825x1275.png?text=character%20sheet > ./pages/2.png`
+  `curl -s https://via.placeholder.com/825x1275.png?text=inventory > ./pages/3.png`
+  `pandoc ./rules/characters.md | wkhtmltoimage --width #{WIDTH} --height #{HEIGHT} - ./pages/4.png 2>/dev/null`
+  `pandoc ./rules/archetypes.md | wkhtmltoimage --width #{WIDTH} --height #{HEIGHT} - ./pages/5.png 2>/dev/null`
+  `pandoc ./rules/rules.md | wkhtmltoimage --width #{WIDTH} --height #{HEIGHT} - ./pages/6.png 2>/dev/null`
   `curl -s https://via.placeholder.com/825x1275.png?text=page%207 > ./pages/7.png`
   `curl -s https://via.placeholder.com/825x1275.png?text=page%208 > ./pages/8.png`
 end
@@ -30,6 +32,7 @@ task build_pdfs: [:build_pages] do
     -tile 4x2 \
     ./dist/release.pdf
   `
+
   # TODO: See if we can consolidate this
   one = Tempfile.new
   seven = Tempfile.new

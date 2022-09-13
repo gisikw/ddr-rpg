@@ -4,6 +4,7 @@ require 'tempfile'
 WIDTH=825
 HEIGHT=1275
 PAGE_SIZE = "#{WIDTH}x#{HEIGHT}"
+CUSTOM_WK_HTML_CONFIG = "--width #{WIDTH} --height #{HEIGHT} --user-style-sheet ./src/style.css"
 
 # TODO: Check bins exist: imagemagick, pandoc, wkhtmltoiomage
 
@@ -11,9 +12,9 @@ task :build_pages do
   `curl -s https://via.placeholder.com/825x1275.png?text=cover > ./pages/1.png`
   `curl -s https://via.placeholder.com/825x1275.png?text=character%20sheet > ./pages/2.png`
   `curl -s https://via.placeholder.com/825x1275.png?text=inventory > ./pages/3.png`
-  `pandoc ./rules/characters.md | wkhtmltoimage --width #{WIDTH} --height #{HEIGHT} - ./pages/4.png 2>/dev/null`
-  `pandoc ./rules/archetypes.md | wkhtmltoimage --width #{WIDTH} --height #{HEIGHT} - ./pages/5.png 2>/dev/null`
-  `pandoc ./rules/rules.md | wkhtmltoimage --width #{WIDTH} --height #{HEIGHT} - ./pages/6.png 2>/dev/null`
+  `pandoc ./rules/characters.md | wkhtmltoimage #{CUSTOM_WK_HTML_CONFIG} -  ./pages/4.png 2>/dev/null`
+  `pandoc ./rules/archetypes.md | wkhtmltoimage #{CUSTOM_WK_HTML_CONFIG} - ./pages/5.png 2>/dev/null`
+  `pandoc ./rules/rules.md | wkhtmltoimage #{CUSTOM_WK_HTML_CONFIG} - ./pages/6.png 2>/dev/null`
   `curl -s https://via.placeholder.com/825x1275.png?text=page%207 > ./pages/7.png`
   `curl -s https://via.placeholder.com/825x1275.png?text=page%208 > ./pages/8.png`
 end

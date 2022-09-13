@@ -6,3 +6,4 @@
 - On a critical success, maximize subsequent die rolls
 - Clever talents can be broad. Silver tongued. Well-read.
 - Players: say yes to adventure. GMs: say yes to cool.
+- A scene is an instance of combat, ten minutes, or whatever the GM determines

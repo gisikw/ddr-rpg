@@ -1,0 +1,57 @@
+<!-- Designed for 825x1275 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf8">
+    <style>
+      * {
+        box-sizing: border-box;
+        font-size: 36px;
+      }
+      /* #sheet { border: 1px solid #000; } */
+      #sheet {
+        height: 1275px;
+        width: 825px;
+        box-sizing: border-box;
+        padding: 20px;
+      }
+      #attrs {
+        margin-top: 20px;
+      }
+      #attrs div {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: right;
+        width: 90px;
+        height: 100px;
+        position: relative;
+        margin-bottom: 20px;
+      }
+      #attrs div:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 100px;
+        width: 100px;
+        height: 100%;
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="sheet">
+      <h1>Name</h1> _______
+      <h1>Background</h1> ________
+      <div id="attrs">
+        <div>Str</div>
+        <div>Dex</div>
+        <div>Con</div>
+        <div>Int</div>
+        <div>Wis</div>
+        <div>Cha</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
